@@ -1,0 +1,49 @@
+@extends('adminlayout.adminlayout')
+@section('body')
+@if(session('success'))
+<div class="alert alert-success">
+  {{session('success')}}
+</div>
+@endif
+
+@if(session('error'))
+<div class="alert alert-danger">
+  {{session('error')}}
+</div>
+@endif
+
+@if ($errors->any())
+<div class="alert alert-danger">
+  <ul class="mb-0">
+    @foreach($errors->all() as $error)
+    <li>{{$error}}</li>
+@endforeach
+
+</ul>
+</div>
+@endif
+
+<div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Create category</h4>
+                  <p class="card-description">
+                    Basic form layout
+                  </p>
+                  <form class="forms-sample" action="{{ route('cat.store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="form-group">
+                      <label for="exampleInputUsername1">Title</label>
+                      <input type="text" class="form-control" id="exampleInputUsername1" placeholder="Title" name="name"> 
+                    </div>
+                     <div class="form-group">
+                      <label for="exampleInputEmail1">Image</label>
+                      <input type="file" class="form-control" id="exampleInputEmail1" placeholder="Image" name="image">
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary me-2">Submit</button>
+                    <button class="btn btn-light">Cancel</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+@endsection
